@@ -1,0 +1,54 @@
+{% include "content/admin/head.html" %}
+{% set i = admin.type.data|length + 1 %}
+<form action="{{baseUrl}}/admin/type/update" method="post">
+    <div class="row">
+        <label for="name">Name:</label><br />
+        <input type="text" name="name" value="{{admin.type.name}}" />
+    </div>
+    {% for key, value in admin.type.data %}
+    {% include "content/admin/type-edit-row.html" with {"id" : key} %}
+    {% endfor %}
+    <div id="newPropertyContainer">
+        <h3>add property</h3>
+        {% include "content/admin/type-edit-row.html" with {"id" : i } %}
+    </div>
+    <div class="row">
+        <a class="newProperty md-col-4 btn btn-primary" id="newPropertyLink">add another</a>
+    </div>
+    <div class="row">
+        <input type="hidden" name="id" value="{{admin.type.id}}" />
+        <input type="submit" value="save" />
+    </div>
+</form>
+<script>
+    var newPropertyID = parseInt({{i}}) + 1;
+    $('#newPropertyLink').click(function () {
+
+        $.ajax({
+            url : "{{baseUrl}}/admin/type/property-row",
+            data : {
+                "id" : newPropertyID
+            }
+        }).done( function (data) {
+            $('#newPropertyContainer').append(data);
+            newPropertyID = newPropertyID + 1;
+        });
+
+    });
+
+    $('body').on('click', '.insertDefaultValueLink', function (e) {
+        e.preventDefault();
+        var defaultValueID = parseInt($(e.target).siblings('.defaultValuesSection').find('input.defaultValueInput').length) + 1,
+                propertyID = parseInt($(e.target).closest('.propertyContainer').data('property-id'));
+        $.ajax({
+            url : $(e.target).attr('href'),
+            data : {
+                'defaultValueID' : defaultValueID,
+                'id' : propertyID
+            }
+        }).done( function (data) {
+            $(e.target).siblings('.defaultValuesSection').append(data);
+        })
+    });
+</script>
+{% include "content/admin/footer.html" %}

@@ -1,0 +1,31 @@
+
+<div class='row propertyContainer' data-property-id='{{id}}'>
+    <div class='col-md-6'>
+        <label for='name'>Name:</label><br />
+        <input type='text' name='data[{{id}}][name]' value='{{value.name}}' />
+    </div>
+    <div class='col-md-2'>
+        <label for='inputType'>Input Type:</label><br />
+        <select name='data[{{id}}][inputType]'>
+            <option value='{{value.inputType}}'>{{value.inputType}}</option>
+            <option value='text'>text</option>
+            <option value='textarea'>textarea</option>
+            <option value='select'>select</option>
+            <option value='radio'>radio</option>
+            <option value='text'>checkbox</option>
+        </select>
+    </div>
+    <div class='col-md-2'>
+        <label for='name'>Default Values:</label><br />
+        <div class='defaultValuesSection' data-default-values-count='{{value.defaultValues|length}}'>
+            {% for defaultValue in value.defaultValues %}
+            {% include 'content/admin/default-value-input.html' with {'defaultValueID' : defaultValue.index} %}
+            {% endfor %}
+        </div>
+        <a class='btn insertDefaultValueLink' href='{{baseUrl}}/admin/type/default-value-input'>add default value</a>
+    </div>
+    <div class='col-md-2'>
+        <input type='checkbox' name='data[{{id}}][required]' {% if value.required == true %} checked {% endif %} />
+        <label for='required'>Required</label>
+    </div>
+</div>

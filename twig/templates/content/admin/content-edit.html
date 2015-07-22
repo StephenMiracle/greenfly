@@ -1,0 +1,23 @@
+{% include "content/admin/head.html" %}
+<form action="{{baseUrl}}/admin/content/update" method="post">
+    <div class="row">
+        <div class="md-col-6">
+            <label for="name">name:</label><br />
+            <input type="text" name="name" value="{{details.content.name}}" />
+        </div>
+        <div class="md-col-3">
+            <label for="type">content type:</label><br />
+            <select name="type">
+                <option value="{{details.content.type.id}}">{{details.content.type.name}}</option>
+                {% for type in details.types %}
+                <option value="{{type.id}}">{{type.name}}</option>
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+    <div class="row">
+        <input type="hidden" name="id" value="{{details.content.id}}" />
+        <input type="submit" nme="submit" value="Save" class="btn btn-primary" />
+    </div>
+</form>
+{% include "content/admin/footer.html" %}

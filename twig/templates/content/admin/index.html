@@ -1,0 +1,25 @@
+{% include "content/admin/head.html" %}
+    <h1>Content Editor</h1>
+    <h2>Content Types</h2>
+    <ul>
+{% for type in admin.types %}
+        <li><a href="{{baseUrl}}/admin/type/edit/{{type.id}}">{{type.name}}</a> | <a href="{{baseUrl}}/admin/content/edit/0">Add content</a></li>
+{% endfor %}
+        <li><a href="{{baseUrl}}/admin/type/edit/0">add new content type</a></li>
+    </ul>
+
+<h2>Latest Content</h2>
+
+<ul>
+    {% for content in admin.contents %}
+    <li><a href="{{baseUrl}}/admin/content/edit/{{content.id}}">{{content.name}}</a>
+        <ul>{% for version in content.versions %}
+            <li><a href="{{baseUrl}}/admin/version/{{version.id}}/edit">{{version.name}}</a></li>
+            {% endfor %}
+            <li><a href="">add new version</a></li>
+        </ul>
+    {% endfor %}
+    </li>
+</ul>
+
+{% include "content/admin/footer.html" %}

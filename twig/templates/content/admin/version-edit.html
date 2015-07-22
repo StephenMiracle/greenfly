@@ -1,0 +1,34 @@
+{% include "content/admin/head.html" %}
+{{dump()}}
+<form action="{{baseUrl}}/admin/version/update" method="post">
+    <div class="row">
+        <div class="md-col-6">
+            <label for="name">name:</label><br />
+            <input type="text" name="name" value="{{details.version.name}}" />
+        </div>
+        <div class="md-col-3">
+            {% for property in details.type.data %}
+            {{ property.name}}:<br />
+            {% if property.inputType == 'text' %}
+            <input type="text" value="{% for defaultValue in property.defaultValues %}{{defaultValue}}, {% endfor %}" name="data[{{property.name}}]" />
+            {% endif %}
+            {% if property.inputType == 'textarea' %}
+            <textarea name="data[{{property.name}}]">{% for defaultValue in property.defaultValues %}{{defaultValue}}, {% endfor %}</textarea>
+            {% endif %}
+            {% if property.inputType == 'select' %}
+            <select name="data[{{property.name}}]">
+                {% for defaultValue in property.defaultValues %}
+                <option value="{{defaultValue}}">{{defaultValue}}</option>
+                {% endfor %}
+            </select>
+            {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+    <div class="row">
+        <input type="hidden" name="id" value="{{details.version.id}}" />
+        <input type="hidden" name="contentID" value="{{details.content.id}}" />
+        <input type="submit" nme="submit" value="Save" class="btn btn-primary" />
+    </div>
+</form>
+{% include "content/admin/footer.html" %}
