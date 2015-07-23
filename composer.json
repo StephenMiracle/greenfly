@@ -8,6 +8,6 @@
         }
     ],
     "require": {
-        "StephenMiracle/greenfly-framework" : "~0.1"
+        "StephenMiracle/greenfly-framework" : "0.*"
     }
 }
