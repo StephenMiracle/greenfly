@@ -1,13 +1,11 @@
 <?php
 
 
-use Greenfly\App as App;
 
 include '../vendor/autoload.php';
 include '../database.php';
 
-$app = new App();
-
+use Greenfly\App as App;
 
 $documentTree = [
     'get' => [
@@ -23,6 +21,34 @@ $documentTree = [
                     'data' => []
                 ]
             ],
+        ],
+        '/insights' => [
+            'callback' => [['Greenfly\Modules\Content\Content', 'tag'],
+            'config' => [
+                'params' => [
+                    'tag' => ['id' => 1], // let's say a work tag
+                    'version' => ['status' => 1]
+
+                ],
+                'render' => [
+                    'view' => 'insights.html',
+                    'data' => []
+                ]
+            ]]
+        ],
+        '/work' => [
+            'callback' => [['Greenfly\Modules\Content\Content', 'tag'],
+                'config' => [
+                    'params' => [
+                        'tag' => ['id' => 1], // let's say a work tag
+                        'version' => ['status' => 1]
+
+                    ],
+                    'render' => [
+                        'view' => 'work.html',
+                        'data' => []
+                    ]
+                ]]
         ]
     ]
 ];
