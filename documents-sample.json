@@ -1,0 +1,21 @@
+{
+  "get": {
+    "\/articles\/:name": {
+      "callback": ["Greenfly\\Modules\\Content\\Content", "single"],
+      "config": {
+        "params": {
+          "content": {
+            "type_id": 2
+          },
+          "version": {
+            "status": 1
+          }
+        },
+        "render": {
+          "view": "index.html",
+          "data": []
+        }
+      }
+    }
+  }
+}
