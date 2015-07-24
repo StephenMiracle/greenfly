@@ -1,13 +1,15 @@
 {
     "name": "greenfly/greenfly",
     "description": "Rapid CMS made for creative professionals",
+    "minimum-stability": "dev",
     "authors": [
         {
-            "name": "",
-            "email": ""
+            "name": "Stephen Miracle",
+            "email": "stephen@thatmiracle.com"
         }
     ],
     "require": {
-        "StephenMiracle/greenfly-framework" : "0.*"
+        "greenfly/framework" : "dev-master"
     }
+
 }
