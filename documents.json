@@ -1,22 +1,73 @@
 {
+
+
+
+
   "get": {
-    "\/articles\/:name": {
-      "callback": ["Greenfly\\Modules\\Content\\Content", "single"],
+
+
+    "/install" : {
+
+        "callback" : ["Greenfly\\Modules\\Content\\Installer", "start"]
+
+      },
+
+
+    "/content-archive" : {
+      "callback" : ["Greenfly\\Modules\\Content\\Content", "contentArchive"],
       "config": {
-        "params": {
-          "content": {
-            "type_id": 2
-          },
-          "version": {
-            "status": 1
-          }
-        },
         "render": {
           "view": "base/single.html",
           "data": []
         }
       }
     },
-    "\/" : "base/index.html"
+
+    "/archive/:type_name" : {
+      "callback" : ["Greenfly\\Modules\\Content\\Content", "contentArchive"],
+      "config": {
+        "render": {
+          "view": "base/single.html",
+          "data": []
+        }
+      }
+    },
+
+
+    "/:locale/:type_name/:content_name": {
+
+      "callback": ["Greenfly\\Modules\\Content\\Content", "contentWithRelated"],
+
+      "config": {
+        "render": {
+          "view": "base/single.html",
+          "data": []
+        }
+      }
+    },
+
+
+
+    "/:types" : {
+      "callback" : ["Greenfly\\Modules\\Content\\Content", "typesWithContentAndTaxonomies"],
+      "config": {
+        "render": {
+          "view": "base/single.html",
+          "data": []
+        }
+      }
+    },
+
+
+    "/:type_name/:content_name": {
+      "callback": ["Greenfly\\Modules\\Content\\Content", "contentWithRelated"],
+      "config": {
+        "render": {
+          "view": "base/single.html",
+          "data": []
+        }
+      }
+    },
+    "/" : "base/index.html"
   }
 }
